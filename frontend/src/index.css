@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-neutral-800;
+  }
+  
+  body {
+    @apply bg-background text-neutral-50 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-lg font-medium transition-colors;
+  }
+  
+  .btn-danger {
+    @apply px-4 py-2 bg-danger hover:bg-danger/80 text-white rounded-lg font-medium transition-colors;
+  }
+}
