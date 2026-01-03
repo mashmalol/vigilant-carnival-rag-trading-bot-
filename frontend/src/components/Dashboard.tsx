@@ -1,11 +1,15 @@
 import React from 'react';
 import { useTradeStore } from '../store/tradeStore';
 import { useWebSocket } from '../hooks/useWebSocket';
+import { useRAGMemory } from '../hooks/useRAGMemory';
 import { StatusIndicator } from './StatusIndicator';
 import { TradeCard } from './TradeCard';
 import { ControlPanel } from './ControlPanel';
 import { PositionTable } from './PositionTable';
 import { PriceChart } from './PriceChart';
+import { RiskDashboard } from './RiskDashboard';
+import { PerformanceMetrics } from './PerformanceMetrics';
+import { RAGMemoryViewer } from './RAGMemoryViewer';
 import { WifiOff } from 'lucide-react';
 
 /**
@@ -15,6 +19,7 @@ import { WifiOff } from 'lucide-react';
  */
 export const Dashboard: React.FC = () => {
   const socket = useWebSocket();
+  const { queryMemory } = useRAGMemory();
   const { systemStatus, positions, tradeHistory, isConnected } = useTradeStore();
 
   const handleStart = () => {
@@ -79,6 +84,12 @@ export const Dashboard: React.FC = () => {
           </div>
         </div>
 
+        {/* Risk Dashboard */}
+        <RiskDashboard positions={positions} systemStatus={systemStatus} />
+
+        {/* Performance Metrics */}
+        <PerformanceMetrics trades={tradeHistory} totalPnL={systemStatus.totalPnL} />
+
         {/* Price Chart */}
         <PriceChart symbol="BTCUSDT" data={chartData} />
 
@@ -97,6 +108,12 @@ export const Dashboard: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* RAG Memory Viewer */}
+        <RAGMemoryViewer
+          currentSymbol="BTCUSDT"
+          onQueryMemory={queryMemory}
+        />
 
         {/* Trade History Table */}
         <PositionTable trades={tradeHistory} />

@@ -67,4 +67,21 @@ export function setupRoutes(app: Express, arbiter: ArbiterService) {
       res.status(500).json({ error: 'Failed to stop agent' });
     }
   });
+
+  // RAG Memory Query endpoint
+  app.post('/api/rag/query', async (req, res) => {
+    try {
+      const { symbol, context } = req.body;
+      
+      if (!symbol || !context) {
+        return res.status(400).json({ error: 'Symbol and context required' });
+      }
+
+      const similarTrades = await arbiter.queryRAGMemory(symbol, context);
+      res.json({ similarTrades });
+    } catch (error) {
+      console.error('RAG query error:', error);
+      res.status(500).json({ error: 'Failed to query RAG memory' });
+    }
+  });
 }

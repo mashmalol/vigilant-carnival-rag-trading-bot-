@@ -53,3 +53,36 @@ export interface TradeHistory {
   timestamp: number;
   algoType?: string;
 }
+
+export interface PerformanceMetrics {
+  winRate: number;
+  profitFactor: number;
+  sharpeRatio: number;
+  sortinoRatio: number;
+  avgWin: number;
+  avgLoss: number;
+  avgWinPercent: number;
+  avgLossPercent: number;
+  largestWin: number;
+  largestLoss: number;
+  totalTrades: number;
+  winningTrades: number;
+  losingTrades: number;
+  consecutiveWins: number;
+  consecutiveLosses: number;
+  maxConsecutiveWins: number;
+  maxConsecutiveLosses: number;
+  recoveryFactor: number;
+  expectancy: number;
+}
+
+export interface SimilarTrade {
+  id: string;
+  symbol: string;
+  side: 'BUY' | 'SELL';
+  price: number;
+  profit: number;
+  similarity: number;
+  timestamp: number;
+  reasoning: string;
+}
