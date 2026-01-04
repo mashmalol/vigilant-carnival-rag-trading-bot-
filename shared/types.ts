@@ -86,3 +86,51 @@ export interface SimilarTrade {
   timestamp: number;
   reasoning: string;
 }
+
+// Feature 2: Crypto Embeddings
+export interface EmbeddingTrainingPair {
+  anchor: string;
+  positive: string;
+  negative: string;
+}
+
+export interface CryptoEmbeddingConfig {
+  modelPath: string;
+  dimension: number;
+  useLocal: boolean;
+}
+
+// Feature 3: Regime Classifier
+export type MarketRegime = 'bull' | 'bear' | 'sideways' | 'high-volatility';
+
+export interface RegimeClassification {
+  regime: MarketRegime;
+  confidence: number;
+  features: RegimeFeatures;
+  reasoning: string;
+}
+
+export interface RegimeFeatures {
+  trend30d: number;
+  volatility30d: number;
+  rsi: number;
+  volumeTrend: 'increasing' | 'decreasing' | 'stable';
+  pricePosition: number;
+  macdSignal: 'bullish' | 'bearish' | 'neutral';
+}
+
+export interface TradingStrategy {
+  positionSize: number;
+  confidenceThreshold: number;
+  algoType: 'TWAP' | 'VP' | 'MARKET';
+  reasoning: string;
+}
+
+export interface PriceCandle {
+  timestamp: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
