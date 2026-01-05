@@ -95,3 +95,38 @@ export interface SimilarTrade {
   timestamp: number;
   reasoning: string;
 }
+
+// Chat Interface Types
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: number;
+  sources?: TradeSource[];
+}
+
+export interface TradeSource {
+  id: string;
+  symbol: string;
+  profit: number;
+  similarity: number;
+  timestamp: number;
+  reasoning: string;
+}
+
+export interface ChatRequest {
+  message: string;
+  conversationId?: string;
+  includeHistory: boolean;
+}
+
+export interface ChatResponse {
+  message: string;
+  sources: TradeSource[];
+  conversationId: string;
+  usage?: {
+    promptTokens: number;
+    completionTokens: number;
+    totalTokens: number;
+  };
+}
